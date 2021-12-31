@@ -1,5 +1,5 @@
 {
-    "SQLALCHEMY_DATABASE_URI":"postgresql://jose:admin@localhost:5432/zinance",
+    "SQLALCHEMY_DATABASE_URI":"postgresql://jose:admin@localhost:5432/zeenance",
     "SQLALCHEMY_TRACK_MODIFICATIONS": false,
     "JWT_SECRET_KEY":"Kasdifjieldsfij@#sdfjiasdjfierolklsamcçakh$dsifj09efo3ko",
     "JWT_BLACKLIST_ENABLED": true
