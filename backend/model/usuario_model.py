@@ -1,5 +1,6 @@
 from util.db import db
 
+
 class UsuarioModel(db.Model):
     __tablename__ = 'tb_usuario'
 
@@ -16,7 +17,7 @@ class UsuarioModel(db.Model):
         self.senha = senha
 
 
-# API Methods
+# API Methods:
 
 
     def get_all(self):
@@ -24,7 +25,10 @@ class UsuarioModel(db.Model):
 
 
     def get_by_id(self, id):
-        return UsuarioModel.find_by_id(id).json()
+        if UsuarioModel.find_by_id(id):
+            return UsuarioModel.find_by_id(id).json()
+        else:
+            return id_not_found
 
 
     def post(self):
@@ -32,7 +36,10 @@ class UsuarioModel(db.Model):
 
 
     def put(self, id):
-        UsuarioModel.update(id)
+        if UsuarioModel.find_by_id(id):
+            UsuarioModel.update(id)
+        else:
+            return id_not_found
 
 
     def delete(self):
@@ -40,18 +47,19 @@ class UsuarioModel(db.Model):
         UsuarioModel.delete()
 
 
-# Class methods
+# Class methods:
+
 
     @classmethod
     def find_all(cls):
         for found in cls.query.all():
             return found
-    
+
 
     @classmethod
     def find_by_id(cls, id):
         return cls.query.filter_by(id)
-    
+
 
     def add(self):
         db.session.add(self)
@@ -79,3 +87,9 @@ class UsuarioModel(db.Model):
 
     def __repr__(self):
         return '<Usuario %r>' % self.id
+
+
+# Kind of constants for repetitive returns:
+
+
+id_not_found = {'msg': 'id not found'}
