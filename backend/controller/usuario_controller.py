@@ -1,12 +1,13 @@
+from flask import jsonify
 import service.usuario_service as service
 
 
 def get_all():
-    return service.get_all(), 200
+    return jsonify(service.get_all()), 200
 
 
 def get_by_id(id):
-    return service.get_by_id(id), 200
+    return jsonify(service.get_by_id(id)), 200
 
 
 def post():
