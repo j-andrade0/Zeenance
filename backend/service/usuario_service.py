@@ -19,5 +19,15 @@ def post():
 
 def put(id):
     dados = request.get_json()
-    usuario = model(**dados)
-    usuario.update(id)
+    found = model.find_by_id(id)
+    if found:
+        model.put(id, **dados)
+        return {'msg':'Dados alterados'}
+    else:
+        return {'msg':'Id not found'}
+
+
+def delete(id):
+    model.delete(id)
+    return {'msg':'Usuario deletado'}
+

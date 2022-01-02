@@ -33,16 +33,12 @@ class UsuarioModel(db.Model):
         return {}
 
 
-
     def post(self):
         UsuarioModel.add(self)
 
 
-    def put(self, id):
-        if UsuarioModel.find_by_id(id):
-            UsuarioModel.update(id)
-        else:
-            return id_not_found
+    def put(id, **dados):
+        UsuarioModel.update(id, **dados)
 
 
     def delete(self):
@@ -73,9 +69,9 @@ class UsuarioModel(db.Model):
         db.session.commit
 
 
-    def update(self, **dados):
-        UsuarioModel.find_by_id(id).update(dict(**dados))
-        db.session.commit()
+    def update(id, **dados):
+      UsuarioModel.query.filter_by(id=id).update(dict(**dados))
+      db.session.commit()
 
 
     def json(self):
@@ -89,9 +85,3 @@ class UsuarioModel(db.Model):
 
     def __repr__(self):
         return '<Usuario %r>' % self.id
-
-
-# Kind of constants for repetitive returns:
-
-
-id_not_found = {'msg': 'id not found'}
