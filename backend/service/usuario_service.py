@@ -14,6 +14,7 @@ def post():
     dados = request.get_json()
     usuario = model(**dados)
     usuario.post()
+    return {'msg':'Usuario criado'}
 
 
 def put(id):

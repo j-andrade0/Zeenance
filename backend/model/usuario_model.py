@@ -35,7 +35,7 @@ class UsuarioModel(db.Model):
 
 
     def post(self):
-        UsuarioModel.add()
+        UsuarioModel.add(self)
 
 
     def put(self, id):
