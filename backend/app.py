@@ -5,6 +5,11 @@ from util.db import db
 from flask_jwt_extended import JWTManager
 
 
+# Api's imports:
+
+from api.usuario_api import usuario_api
+
+
 config_file = open('config/dev.json') 
 config = json.load(config_file)
 
@@ -20,6 +25,9 @@ app.config['JWT_BLACKLIST_ENABLED'] = config['JWT_BLACKLIST_ENABLED']
 
 
 jwt = JWTManager(app)
+
+
+app.register_blueprint(usuario_api)
 
 
 @app.before_first_request
