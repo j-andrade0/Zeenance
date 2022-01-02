@@ -15,7 +15,9 @@ class UsuarioModel(db.Model):
         self.email = email
         self.senha = senha
 
+
 # API Methods
+
 
     def get_all(self):
         return UsuarioModel.find_all().json()
