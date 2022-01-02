@@ -17,18 +17,21 @@ class UsuarioModel(db.Model):
         self.senha = senha
 
 
-# API Methods:
+ # API Methods:
 
 
-    def get_all(self):
-        return UsuarioModel.find_all().json()
+    def get_all():
+        if UsuarioModel.find_all() == []:
+            return {}
+        return UsuarioModel.find_all()
 
 
-    def get_by_id(self, id):
-        if UsuarioModel.find_by_id(id):
-            return UsuarioModel.find_by_id(id).json()
-        else:
-            return id_not_found
+    def get_by_id(id):
+        found = UsuarioModel.find_by_id(id)
+        if found:
+            return found.json()
+        return {}
+
 
 
     def post(self):
@@ -52,13 +55,12 @@ class UsuarioModel(db.Model):
 
     @classmethod
     def find_all(cls):
-        for found in cls.query.all():
-            return found
+        return [found.json() for found in cls.query.all()]
 
 
     @classmethod
     def find_by_id(cls, id):
-        return cls.query.filter_by(id)
+        return UsuarioModel.query.filter_by(id=id).first()
 
 
     def add(self):
