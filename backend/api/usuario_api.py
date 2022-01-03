@@ -23,3 +23,8 @@ def post():
 @usuario_api.route('/usuario/<id>', methods=['PUT'])
 def put(id):
     return controller.put(id)
+
+
+@usuario_api.route('/usuario/<id>', methods=['DELETE'])
+def delete(id):
+    return controller.delete(id)

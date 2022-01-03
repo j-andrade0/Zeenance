@@ -42,8 +42,7 @@ class UsuarioModel(db.Model):
 
 
     def delete(self):
-        UsuarioModel.find_by_id(id)
-        UsuarioModel.delete()
+        UsuarioModel.remove(self)
 
 
 # Class methods:
@@ -66,7 +65,7 @@ class UsuarioModel(db.Model):
 
     def remove(self):
         db.session.delete(self)
-        db.session.commit
+        db.session.commit()
 
 
     def update(id, **dados):

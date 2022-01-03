@@ -28,6 +28,7 @@ def put(id):
 
 
 def delete(id):
-    model.delete(id)
+    usuario = model.find_by_id(id)
+    usuario.delete()
     return {'msg':'Usuario deletado'}
 
