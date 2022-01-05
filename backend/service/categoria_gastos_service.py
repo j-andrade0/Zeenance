@@ -12,8 +12,8 @@ def get_by_id(id):
 
 def post():
     dados = request.get_json()
-    usuario = model(**dados)
-    usuario.post()
+    categoria = model(**dados)
+    categoria.post()
     return {'msg':'Categoria criada'}
 
 
@@ -28,7 +28,7 @@ def put(id):
 
 
 def delete(id):
-    usuario = model.find_by_id(id)
-    usuario.delete()
+    categoria = model.find_by_id(id)
+    categoria.delete()
     return {'msg':'Categoria deletada'}
 
