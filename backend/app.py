@@ -8,6 +8,7 @@ from flask_jwt_extended import JWTManager
 # Api's imports:
 
 from api.usuario_api import usuario_api
+from api.categoria_gastos_api import categoria_gastos_api
 
 
 config_file = open('config/dev.json') 
@@ -28,6 +29,7 @@ jwt = JWTManager(app)
 
 
 app.register_blueprint(usuario_api)
+app.register_blueprint(categoria_gastos_api)
 
 
 @app.before_first_request
