@@ -80,4 +80,4 @@ class CategoriaGastosModel(db.Model):
 
 
     def __repr__(self):
-        return '<Usuario %r>' % self.id
+        return '<Categoria_Gastos %r>' % self.id
