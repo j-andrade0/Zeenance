@@ -7,7 +7,7 @@ class CategoriaGastosModel(db.Model):
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     nome = db.Column(db.String(45))
-    descricao = db.Column(db.String(70))
+    descricao = db.Column(db.String(70), nullable=True)
 
 
     def __init__(self, nome, descricao):
