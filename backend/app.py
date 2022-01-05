@@ -9,6 +9,7 @@ from flask_jwt_extended import JWTManager
 
 from api.usuario_api import usuario_api
 from api.categoria_gastos_api import categoria_gastos_api
+from api.categoria_recebiveis_api import categoria_recebiveis_api
 
 
 config_file = open('config/dev.json') 
@@ -28,8 +29,11 @@ app.config['JWT_BLACKLIST_ENABLED'] = config['JWT_BLACKLIST_ENABLED']
 jwt = JWTManager(app)
 
 
+# Blueprint register
+
 app.register_blueprint(usuario_api)
 app.register_blueprint(categoria_gastos_api)
+app.register_blueprint(categoria_recebiveis_api)
 
 
 @app.before_first_request
