@@ -1,3 +1,3 @@
 # Zeenance
 
-  Zeenance é um projeto que visa a criação de um sistema básico para gerênciamento de finanças. Ele terá o intuito de ajudar aqueles que querem ter mais controle de seus gastos, mas não o fazem. 
+Zeenance é um projeto que visa a criação de um sistema básico para gerenciamento de finanças. O sistema tem como intuito de ajudar aqueles que querem ter mais controle de seus gastos, permitindo o cadastro de despesas a partir de categorias, tais como: "Alimentação", "Transporte", entre outros. A partir disto ficará fácil gerenciar os gastos mensais, visualizando-os por gastos individuais ou por categorias.
