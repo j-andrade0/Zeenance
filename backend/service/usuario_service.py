@@ -1,5 +1,6 @@
 from flask import request
 from model.usuario_model import UsuarioModel as model
+from model.usuario_model import Login 
 
 
 def get_all():
@@ -32,3 +33,10 @@ def delete(id):
     usuario.delete()
     return {'msg':'Usuario deletado'}
 
+
+# Login de usuario
+def login():
+    dados = request.get_json()
+
+    if Login.dados_corretos(**dados):
+        return Login.gerar_token(**dados)
