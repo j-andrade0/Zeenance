@@ -12,3 +12,4 @@ six==1.16.0
 SQLAlchemy==1.4.28
 Werkzeug==2.0.2
 psycopg2-binary==2.9.2
+jsonify==0.5
