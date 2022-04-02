@@ -13,7 +13,7 @@ def get_by_id(id):
     return jsonify(service.get_by_id(id)), 200
 
 
-@jwt_required()
+
 def post():
     return service.post(), 201
 
