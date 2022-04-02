@@ -1,16 +1,13 @@
+# Importacoes de arquivos e bibliotecas
 import json
-from flask import Flask
+from flask import Flask, jsonify
 from flask_cors import CORS
 from util.db import db
 from flask_jwt_extended import JWTManager
+from blocklist import BLOCKLIST
 
 
-# Api's imports:
-
-from api.usuario_api import usuario_api
-from api.categoria_gastos_api import categoria_gastos_api
-
-
+# Configuracoes
 config_file = open('config/dev.json') 
 config = json.load(config_file)
 
@@ -25,10 +22,13 @@ app.config['JWT_SECRET_KEY'] = config['JWT_SECRET_KEY']
 app.config['JWT_BLACKLIST_ENABLED'] = config['JWT_BLACKLIST_ENABLED']
 
 
-jwt = JWTManager(app)
+# Api's imports:
+
+from api.usuario_api import usuario_api
+from api.categoria_gastos_api import categoria_gastos_api
 
 
-# Blueprint register
+# Registro das api's no Blueprint
 
 app.register_blueprint(usuario_api)
 app.register_blueprint(categoria_gastos_api)
