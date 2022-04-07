@@ -19,7 +19,7 @@ CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = config['SQLALCHEMY_DATABASE_URI']
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['SQLALCHEMY_TRACK_MODIFICATIONS']
 app.config['JWT_SECRET_KEY'] = config['JWT_SECRET_KEY']
-app.config['JWT_BLACKLIST_ENABLED'] = config['JWT_BLACKLIST_ENABLED']
+app.config['JWT_BLOCKLIST_ENABLED'] = config['JWT_BLOCKLIST_ENABLED']
 
 
 # Api's imports:
@@ -32,6 +32,21 @@ from api.categoria_gastos_api import categoria_gastos_api
 
 app.register_blueprint(usuario_api)
 app.register_blueprint(categoria_gastos_api)
+
+
+
+# Configuração JWT
+jwt = JWTManager(app)
+
+
+# Configuracao de logout JWT
+@jwt.token_in_blocklist_loader
+def verifica_blocklist(self, token):
+    return token['jti'] in BLOCKLIST
+
+@jwt.revoked_token_loader
+def token_de_acesso_invalidado(jwt_header, jwt_payload):
+    return jsonify({'msg': 'Voce esta deslogado!'}), 401 # unauthorized
 
 
 @app.before_first_request

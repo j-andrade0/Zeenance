@@ -13,7 +13,6 @@ def get_by_id(id):
     return jsonify(service.get_by_id(id)), 200
 
 
-
 def post():
     return service.post(), 201
 
@@ -31,3 +30,9 @@ def delete(id):
 # Login de usuario
 def login():
     return service.login(), 200
+
+
+# Logout de usuario
+@jwt_required()
+def logout():
+    return service.logout(), 200

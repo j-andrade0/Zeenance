@@ -1,6 +1,7 @@
 from util.db import db
 from werkzeug.security import safe_str_cmp
 from flask_jwt_extended import create_access_token
+from blocklist import BLOCKLIST
 
 
 
@@ -85,7 +86,7 @@ class UsuarioModel(db.Model):
             'id': self.id,
             'nome': self.nome,
             'email': self.email,
-            'senha': self.senha
+            'senha': self.senha 
         }
 
 
@@ -106,3 +107,10 @@ class Login():
 
         token_de_acesso = create_access_token(identity=user.id)
         return {'access_token': token_de_acesso}
+
+
+class Logout():
+
+    def logout(jwt_id):
+        BLOCKLIST.add(jwt_id)
+        return {'message': 'Deslogado com sucesso!'}

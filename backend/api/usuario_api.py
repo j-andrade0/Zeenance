@@ -35,3 +35,7 @@ def delete(id):
 def login():
     return controller.login()
 
+
+@usuario_api.route('/logout', methods=['POST'])
+def logout():
+    return controller.logout()
