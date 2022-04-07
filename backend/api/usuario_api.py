@@ -28,3 +28,14 @@ def put(id):
 @usuario_api.route('/usuario/<id>', methods=['DELETE'])
 def delete(id):
     return controller.delete(id)
+
+# Login de usuario
+
+@usuario_api.route('/login', methods=['POST'])
+def login():
+    return controller.login()
+
+
+@usuario_api.route('/logout', methods=['POST'])
+def logout():
+    return controller.logout()

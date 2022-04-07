@@ -1,9 +1,12 @@
 from util.db import db
+from werkzeug.security import safe_str_cmp
+from flask_jwt_extended import create_access_token
+from blocklist import BLOCKLIST
+
 
 
 class UsuarioModel(db.Model):
     __tablename__ = 'tb_usuario'
-
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     nome = db.Column(db.String(50))
@@ -58,6 +61,11 @@ class UsuarioModel(db.Model):
         return UsuarioModel.query.filter_by(id=id).first()
 
 
+    @classmethod
+    def find_by_email(cls, email):
+        return UsuarioModel.query.filter_by(email=email).first()
+
+
     def add(self):
         db.session.add(self)
         db.session.commit()
@@ -78,9 +86,31 @@ class UsuarioModel(db.Model):
             'id': self.id,
             'nome': self.nome,
             'email': self.email,
-            'senha': self.senha
+            'senha': self.senha 
         }
 
 
     def __repr__(self):
         return '<Usuario %r>' % self.id
+
+
+class Login():
+    def dados_corretos(**dados):
+
+        user = UsuarioModel.find_by_email(dados['login'])
+
+        if user and safe_str_cmp(user.senha, dados['senha']):
+            return True
+
+    def gerar_token(**dados):
+        user = UsuarioModel.find_by_email(dados['login'])
+
+        token_de_acesso = create_access_token(identity=user.id)
+        return {'access_token': token_de_acesso}
+
+
+class Logout():
+
+    def logout(jwt_id):
+        BLOCKLIST.add(jwt_id)
+        return {'message': 'Deslogado com sucesso!'}
