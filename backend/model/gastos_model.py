@@ -8,15 +8,16 @@ class GastosModel(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     valor = db.Column(db.Float)
     descricao = db.Column(db.String(70))
+    categoria_gastos_id = db.Column(db.Integer, db.ForeignKey('tb_categoria_gastos.id'))
+    usuario_id = db.Column(db.Integer, db.ForeignKey('tb_usuario.id'))
 
-    # foreignkey to id_usuario and id_categoria_gastos
 
-
-    def __init__(self, valor, descricao, id_usuario, id_categoria_gastos):
+    def __init__(self, valor, descricao, id_usuario, categoria_gastos_id, usuario_id):
         self.valor = valor
         self.descricao = descricao
         self.id_usuario = id_usuario
-        self.id_categoria_gastos = id_categoria_gastos
+        self.categoria_gastos_id = categoria_gastos_id
+        self.usuario_id = usuario_id
 
 
  # API Methods:
@@ -81,7 +82,9 @@ class GastosModel(db.Model):
             'valor': self.valor,
             'descricao': self.descricao,
             'id_usuario': self.id_usuario,
-            'id_categoria_model': self.id_categoria_gastos
+            'id_categoria_model': self.id_categoria_gastos,
+            'categoria_gastos_id' : self.categoria_gastos_id,
+            'usuario_id' : self.usuario_id 
         }
 
 

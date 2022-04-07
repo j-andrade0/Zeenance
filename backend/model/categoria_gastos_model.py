@@ -1,4 +1,6 @@
 from util.db import db
+from model.gastos_model import GastosModel
+
 
 
 class CategoriaGastosModel(db.Model):
@@ -8,6 +10,7 @@ class CategoriaGastosModel(db.Model):
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
     nome = db.Column(db.String(45))
     descricao = db.Column(db.String(70), nullable=True)
+    gastos = db.relationship('GastosModel')
 
 
     def __init__(self, nome, descricao):
@@ -75,7 +78,8 @@ class CategoriaGastosModel(db.Model):
         return {
             'id': self.id,
             'nome': self.nome,
-            'descricao': self.descricao
+            'descricao': self.descricao,
+            'gastos': [gasto.json() for gasto in self.gastos]
         }
 
 

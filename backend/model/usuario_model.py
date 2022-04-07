@@ -2,6 +2,7 @@ from util.db import db
 from werkzeug.security import safe_str_cmp
 from flask_jwt_extended import create_access_token
 from blocklist import BLOCKLIST
+from model.gastos_model import GastosModel
 
 
 
@@ -12,6 +13,7 @@ class UsuarioModel(db.Model):
     nome = db.Column(db.String(50))
     email = db.Column(db.String(100), unique = True)
     senha = db.Column(db.String(32))
+    gastos = db.relationship('GastosModel')
 
 
     def __init__(self, nome, email, senha):
@@ -86,7 +88,9 @@ class UsuarioModel(db.Model):
             'id': self.id,
             'nome': self.nome,
             'email': self.email,
-            'senha': self.senha 
+            'senha': self.senha,
+            'gastos': [gasto.json() for gasto in self.gastos]
+
         }
 
 
