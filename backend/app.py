@@ -46,7 +46,7 @@ def verifica_blocklist(self, token):
 
 @jwt.revoked_token_loader
 def token_de_acesso_invalidado(jwt_header, jwt_payload):
-    return jsonify({'msg': 'Voce esta deslogado!'}), 401 # unauthorized
+    return jsonify({'msg': 'Voce esta deslogado!'}), 401 # sem permissao
 
 
 @app.before_first_request
