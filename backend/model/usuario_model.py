@@ -10,9 +10,9 @@ class UsuarioModel(db.Model):
     __tablename__ = 'tb_usuario'
 
     id = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    nome = db.Column(db.String(50))
-    email = db.Column(db.String(100), unique = True)
-    senha = db.Column(db.String(32))
+    nome = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(100), unique = True, nullable=False)
+    senha = db.Column(db.String(32), nullable=False)
     gastos = db.relationship('GastosModel')
 
 
