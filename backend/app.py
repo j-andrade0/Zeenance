@@ -26,12 +26,14 @@ app.config['JWT_BLOCKLIST_ENABLED'] = config['JWT_BLOCKLIST_ENABLED']
 
 from api.usuario_api import usuario_api
 from api.categoria_gastos_api import categoria_gastos_api
+from api.gastos_api import gastos_api
 
 
 # Registro das api's no Blueprint
 
 app.register_blueprint(usuario_api)
 app.register_blueprint(categoria_gastos_api)
+app.register_blueprint(gastos_api)
 
 
 
@@ -44,11 +46,13 @@ jwt = JWTManager(app)
 def verifica_blocklist(self, token):
     return token['jti'] in BLOCKLIST
 
+
 @jwt.revoked_token_loader
 def token_de_acesso_invalidado(jwt_header, jwt_payload):
     return jsonify({'msg': 'Voce esta deslogado!'}), 401 # sem permissao
 
 
+# Criacao das tabelas no banco de dados
 @app.before_first_request
 def create_database():
     db.create_all()
